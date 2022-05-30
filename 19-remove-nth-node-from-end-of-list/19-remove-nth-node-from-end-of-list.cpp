@@ -11,34 +11,33 @@
 class Solution {
 public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
-        if (n==1 && head->next == nullptr) {
-            return head->next;
-        }
-        if (remove(head, n, true) == -999) {
-            return head->next;
-        }
-        return head;
-    }
-    
-    int remove (ListNode* current, int a, bool first) {
-        //keep calling with a, returning with a-1
+        //Use two pointers; one that goes to the end of the list 
+        //and one that goes to the end -n - 1 (since it has to be on the one before to remove)
         
-        //if node is not terminal, call again with a
-        int temp;
-        if (current->next != nullptr) {
-            temp = remove(current->next, a, false);
-            //if return value is 1 and first is true, return -2 to indicate that head->next should be returned
-            if (temp == 1 && first) {
-                return -999;
-            }
-            // if temp = 0, remove next node
-            if (temp == 0) {
-                current->next = current->next->next;
-            }
-            //return temp-1 
-            return temp-1;
+        //go until remove is the first element
+        ListNode* last = head;
+        for (int i = 0; i < n; i++) {
+            last = last->next;
         }
-        return a-1;
+        ListNode* remove = head;
+        
+        //edge case where n=size
+        if (last == NULL) {
+            return head->next;
+        }
+        
+        //go until  last hits end of list
+        while (true) {
+            if (last->next == nullptr) {
+                break;
+            }
+            last = last->next;
+            remove = remove->next;
+        }
+        
+        //remove and return head
+        remove->next = remove->next->next;
+        return head;
     }
     
     
