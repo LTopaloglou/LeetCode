@@ -13,7 +13,7 @@ public:
     vector<ListNode*> splitListToParts(ListNode* head, int k) {
         vector<ListNode*> output(k);
         
-        //find length of list
+        //find length
         int len = 0;
         if (head == nullptr) {
             //special case linked list is empty
