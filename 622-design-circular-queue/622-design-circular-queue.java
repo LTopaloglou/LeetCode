@@ -14,8 +14,7 @@ class MyCircularQueue {
     public boolean enQueue(int value) {
         if (size < cap) {
             list[(pointer+size)%cap] = value;
-            System.out.println(value + " succesfully enqueued at " + (pointer+size)%cap);
-            size++;
+            ++size;
             return true;
         }
         return false;
@@ -25,9 +24,8 @@ class MyCircularQueue {
         if (size == 0) {
             return false;
         }
-        list[pointer] = 0; //is this really necessary? probably not.
         pointer = (pointer+1)%cap;
-        size--;
+        --size;
         return true;
     }
     
