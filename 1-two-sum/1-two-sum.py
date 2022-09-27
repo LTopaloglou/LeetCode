@@ -5,9 +5,10 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
+        d = dict()
         l = len(nums)
-        for j in range(l):
-            for i in range(j+1, l):
-                if nums[i] + nums[j] == target:
-                    return [j, i]
-        
+        for i in range(l):
+            if nums[i] in d:
+                return [d[nums[i]], i]
+            else:
+                d[target-nums[i]] = i
